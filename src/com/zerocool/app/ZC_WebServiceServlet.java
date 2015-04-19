@@ -19,18 +19,15 @@ public class ZC_WebServiceServlet extends HttpServlet {
 	private int param_version;
 	private int param_part_id;
 	private String param_bib;
-	private String param_fname;
-	private String param_lname;
+	private String param_name;
 	private String param_start;
 	private String param_end;
 	private String param_elapsed;
 	
 	private String tableStart = "<table>"
 			+ "	<tr>"
-			+ "		<th>ID</th>"
 			+ "		<th>Bib Number</th>"
-			+ "		<th>First Name</th>"
-			+ "		<th>Last Name</th>"
+			+ "		<th>Name</th>"
 			+ "		<th>Start Time</th>"
 			+ "		<th>End Time</th>"
 			+ "		<th>Elapsed Time</th>"
@@ -70,8 +67,7 @@ public class ZC_WebServiceServlet extends HttpServlet {
 
 		param_event_title = req.getParameter("event_title");
 		param_bib = req.getParameter("bib");
-		param_fname = req.getParameter("fname");
-		param_lname = req.getParameter("lname");
+		param_name = req.getParameter("name");
 		param_start = req.getParameter("start");
 		param_end = req.getParameter("end");
 		param_elapsed = req.getParameter("elapsed");
@@ -97,10 +93,8 @@ public class ZC_WebServiceServlet extends HttpServlet {
 				for(ParticipantWebDisplay pojo : participants){
 					
 					resp.getWriter().println("	<tr>"
-							+ "		<td>"+pojo.getPart_Id()+"</td>"
 							+ "		<td>"+pojo.getBib()+"</td>"
-							+ "		<td>"+pojo.getfName()+"</td>"
-							+ "		<td>"+pojo.getlName()+"</td>"
+							+ "		<td>"+pojo.getName()+"</td>"
 							+ "		<td>"+pojo.getStart()+"</td>"
 							+ "		<td>"+pojo.getEnd()+"</td>"
 							+ "		<td>"+pojo.getElapsed()+"</td>"
@@ -116,8 +110,7 @@ public class ZC_WebServiceServlet extends HttpServlet {
 				participants.add(participant);
 			}
 			if (param_bib!=null) participant.setBib(param_bib);
-			if (param_fname!=null) participant.setfName(param_fname);
-			if (param_lname!=null) participant.setlName(param_lname);
+			if (param_name!=null) participant.setName(param_name);
 			if (param_start!=null) participant.setStart(param_start);
 			if (param_end!=null) participant.setEnd(param_end);
 			if (param_elapsed!=null) participant.setElapsed(param_elapsed);

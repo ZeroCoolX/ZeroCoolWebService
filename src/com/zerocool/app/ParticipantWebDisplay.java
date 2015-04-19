@@ -5,8 +5,7 @@ public class ParticipantWebDisplay {
 	private int part_id;
 	
 	private String bib;
-	private String fName;
-	private String lName;
+	private String name;
 	private String start;
 	private String end;
 	private String elapsed;
@@ -16,11 +15,10 @@ public class ParticipantWebDisplay {
 	public ParticipantWebDisplay(int part_id) {
 		setPart_Id(part_id);
 	}
-	public ParticipantWebDisplay(int part_id, String bib, String fName, String lName, String start, String end, String elapsed){
+	public ParticipantWebDisplay(int part_id, String bib, String Name, String start, String end, String elapsed){
 		setPart_Id(part_id);
 		setBib(bib);
-		setfName(fName);
-		setlName(lName);
+		setName(Name);
 		setStart(start);
 		setEnd(end);
 		setElapsed(elapsed);
@@ -40,17 +38,11 @@ public class ParticipantWebDisplay {
 	public void setBib(String bib) {
 		this.bib = bib==null?"":bib;
 	}
-	public String getfName() {
-		return fName==null?"":fName;
+	public String getName() {
+		return name==null?"":name;
 	}
-	public void setfName(String fName) {
-		this.fName = fName==null?"":fName;
-	}
-	public String getlName() {
-		return lName==null?"":lName;
-	}
-	public void setlName(String lName) {
-		this.lName = lName==null?"":lName;
+	public void setName(String name) {
+		this.name = name==null?"":name;
 	}
 	public String getStart() {
 		return start==null?"":start;
