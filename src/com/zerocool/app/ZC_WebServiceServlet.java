@@ -2,7 +2,6 @@ package com.zerocool.app;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 
 import javax.servlet.http.*;
 
@@ -12,8 +11,8 @@ public class ZC_WebServiceServlet extends HttpServlet {
 	private static final String DEFAULT_TITLE = "The Race";
 	
 	private ArrayList<ParticipantWebDisplay> participants = new ArrayList<ParticipantWebDisplay>();
-	private int version=1;
-	private String event_title=DEFAULT_TITLE;
+	private int version = 1;
+	private String event_title = DEFAULT_TITLE;
 	
 	private String param_event_title;
 	private int param_version;
@@ -34,34 +33,29 @@ public class ZC_WebServiceServlet extends HttpServlet {
 			+ "	</tr>";
 	private String tableEnd = "</table>";
 	
-	public void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws IOException {
+	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		resp.setContentType("text/html");
 		
-		if(req.getParameter("version") != null){
-			try{
+		if (req.getParameter("version") != null) {
+			try {
 				param_version = Integer.parseInt(req.getParameter("version"));
-			}
-			catch(NumberFormatException e){
+			} catch(NumberFormatException e) {
 				param_version = -1;
 			}
-		}
-		else{
+		} else {
 			param_version = -1;
 		}
 		
-		if(req.getParameter("part_id") != null){
+		if (req.getParameter("part_id") != null) {
 			System.out.println("part_id is not null...");
-			try{
+			try {
 				param_part_id = Integer.parseInt(req.getParameter("part_id"));
 				System.out.println("part_id parsed...");
 				System.out.println("part_id is " + param_part_id);
-			}
-			catch(NumberFormatException e){
+			} catch(NumberFormatException e) {
 				param_part_id = -1;
 			}
-		}
-		else{
+		} else {
 			param_part_id = -1;
 		}
 
@@ -72,25 +66,28 @@ public class ZC_WebServiceServlet extends HttpServlet {
 		param_end = req.getParameter("end");
 		param_elapsed = req.getParameter("elapsed");
 		
-		if (param_event_title != null){
+		if (param_event_title != null) {
 			event_title = param_event_title;
 		}
-		if (req.getParameter("version") != null && req.getParameter("part_id") != null){
+		
+		if (req.getParameter("version") != null && req.getParameter("part_id") != null) {
 			resp.getWriter().println("Error: GET request both asked for information (version parameter) and sent information (part_id parameter)");
 			return;
 		}
+		
 		if (req.getParameter("version") != null) {
-			if(param_version < 0){
+			if (param_version < 0) {
 				participants.clear();
-				event_title=DEFAULT_TITLE;
+				event_title = DEFAULT_TITLE;
 				version=0;
 				return;
 			}
-			if(param_version!=version){
+			
+			if (param_version!=version) {
 				resp.getWriter().println("<div class=\"hidden\" id=\"version\">"+version+"</div>");
 				resp.getWriter().println("<h1>"+event_title+"</h1>");
 				resp.getWriter().println(tableStart);
-				for(ParticipantWebDisplay pojo : participants){
+				for (ParticipantWebDisplay pojo : participants) {
 					
 					resp.getWriter().println("	<tr>"
 							+ "		<td>"+pojo.getBib()+"</td>"
@@ -103,9 +100,9 @@ public class ZC_WebServiceServlet extends HttpServlet {
 				resp.getWriter().println(tableEnd);
 			}
 		}
-		if (req.getParameter("part_id") != null){
+		if (req.getParameter("part_id") != null) {
 			ParticipantWebDisplay participant = participantWithID(param_part_id);
-			if (participant==null){
+			if (participant==null) {
 				participant = new ParticipantWebDisplay(param_part_id);
 				participants.add(participant);
 			}
@@ -118,15 +115,15 @@ public class ZC_WebServiceServlet extends HttpServlet {
 		}
 	}
 	
-	public void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws IOException {
-		doPost(req,resp);
+	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		doGet(req,resp);
 	}
 	
-	private ParticipantWebDisplay participantWithID(int id){
+	private ParticipantWebDisplay participantWithID(int id) {
 		ParticipantWebDisplay result = null;
-		for(ParticipantWebDisplay participant : participants){
-			if (participant.getPart_Id()==id) return participant;
+		for (ParticipantWebDisplay participant : participants) {
+			if (participant.getPart_Id()==id) 
+				return participant;
 		}
 		System.out.println("No participant found with part_id " + id);
 		return result;
