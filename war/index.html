@@ -31,12 +31,10 @@
 				if (xmlhttp.readyState==4 && xmlhttp.status==200) {
 					var result=xmlhttp.responseText;
 					//alert("ok...");
-					if(result!=""){
-						document.getElementById('htmlBody').innerHTML = result;
-					}
+					document.getElementById('htmlBody').innerHTML = result;
 				}
 			}
-			xmlhttp.open("GET","zc_webservice?version="+version,true);
+			xmlhttp.open("GET","zc_webservice",true);
 			xmlhttp.send();
     	}
     </script>
