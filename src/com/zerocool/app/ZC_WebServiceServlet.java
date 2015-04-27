@@ -11,36 +11,43 @@ public class ZC_WebServiceServlet extends HttpServlet {
 	
 	private static final String DEFAULT_TITLE = "The Race";
 	
-	private ArrayList<ParticipantWebDisplay> participants = new ArrayList<ParticipantWebDisplay>();
+	private String json;
 	
-	private String data;
-	
-	private String tableStart = "<table>"
+	private String tableStart = "<table id='parResultsTable'>"
+			+ "<thead>"
 			+ "	<tr>"
 			+ "		<th>Bib Number</th>"
-			+ "		<th>Name</th>"
+			+ "		<th>Event Name</th>"
 			+ "		<th>Start Time</th>"
-			+ "		<th>End Time</th>"
+			+ "		<th>Finish Time</th>"
 			+ "		<th>Elapsed Time</th>"
-			+ "	</tr>";
+			+ "	</tr>"
+			+ "<thead>";
 	private String tableEnd = "</table>";
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		resp.setContentType("text/html");
-		
 		makeTable(req, resp);
 	}
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		resp.setContentType("text/html");
-		data = req.getParameter("data");
+		json = req.getParameter("data");
 	}
 	
 	private void makeTable(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		PrintWriter writer = resp.getWriter();
-		
-		writer.println(tableStart);
-		
+		writer.println(this.tableStart);
+		writer.println("<tbody id='parBody'>");
+		writer.println("</tbody>");
+		writer.println(this.tableEnd);
+		writer.println("<script>");
+		writer.println("var text = '" + json + "';" );
+		writer.println("var obj = JSON.parse(text);");
+		writer.println("for (var k in obj) {");
+		writer.println("	document.getElementById('parBody').innerHTML += '<tr> '+'<td>' +obj[k].bib+'</td> '+'<td>'+obj[k].eventName+'</td> '+'<td>' + obj[k].startTime + '</td> '+'<td>'+obj[k].finishTime+'</td> '+'<td>'+obj[k].elapsed+'</td> '+ '</tr>';");
+		writer.println("}");
+		writer.println("");
+		writer.println("</script>");
 	}
-	
 }
