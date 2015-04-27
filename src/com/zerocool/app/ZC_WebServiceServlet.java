@@ -11,7 +11,7 @@ public class ZC_WebServiceServlet extends HttpServlet {
 	
 	private static final String DEFAULT_TITLE = "The Race";
 	
-	private String json;
+	private String json = "";
 	
 	private String tableStart = "<table id='parResultsTable'>"
 			+ "<thead>"
