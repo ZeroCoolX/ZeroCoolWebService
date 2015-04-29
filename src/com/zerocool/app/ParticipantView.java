@@ -2,7 +2,7 @@ package com.zerocool.app;
 
 import java.util.Comparator;
 
-public class ParticipantView {
+public class ParticipantView  {
 
 	private String eventName;
 	private String startTime;
