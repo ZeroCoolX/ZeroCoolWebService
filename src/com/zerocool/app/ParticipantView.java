@@ -12,11 +12,16 @@ public class ParticipantView  {
 	private int bib;
 	
 	public String toRow() {
-		return "<tr><td>" + bib + "</td><td>" + eventName + "</td><td>" + startTime + "</td><td>" + finishTime + "</td><td>" + elapsed + "</td></tr>";
+		return "<tr><td>" + bib + "</td><td>" + eventName + "</td><td>" + startTime + "</td><td>" + (fin == -1 ? "DNF" : finishTime) + 
+				"</td><td>" + (fin == -1 ? "DNF" : elapsed) + "</td></tr>";
 	}
 	
 	public long getElapsedTime() {
 		return fin;
+	}
+	
+	public String getEventName() {
+		return eventName;
 	}
 	
 	public static class Com implements Comparator<ParticipantView> {
