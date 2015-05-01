@@ -8,7 +8,7 @@ import com.zerocool.app.ParticipantView;
 public class RunTable {
 	
 	private String table;
-	private String tableStart = "<table>"
+	private String tableStart = "<table class='table table-striped' style='background-color:DarkGrey'>"
 			+ "	<tr>"
 			+ " 	<th>Bib Number</th>"
 			+ "		<th>Event Name</th>"
