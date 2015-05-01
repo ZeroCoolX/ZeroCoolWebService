@@ -10,7 +10,6 @@ public class ParticipantView  {
 	private String elapsed;
 	private long fin;
 	private int bib;
-	
 	public String toRow() {
 		return "<tr"+ (fin == -1 ? " class='danger'" : "")+"><td>" + bib + "</td><td>" + eventName + "</td><td>" + startTime + "</td><td>" + (fin == -1 ? "DNF" : finishTime) + 
 				"</td><td>" + (fin == -1 ? "DNF" : elapsed) + "</td></tr>";
