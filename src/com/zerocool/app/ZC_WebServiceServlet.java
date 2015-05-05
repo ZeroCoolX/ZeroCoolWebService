@@ -76,7 +76,12 @@ public class ZC_WebServiceServlet extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		resp.setContentType("text/html");
-		tables.addParticipants((ArrayList<ParticipantView>) new Gson().fromJson(req.getParameter("data"), new TypeToken<ArrayList<ParticipantView>>(){}.getType()));
+		String data = req.getParameter("data");
+		if (data.equals("null")) {
+			tables.reset();
+		} else {
+			tables.addParticipants((ArrayList<ParticipantView>) new Gson().fromJson(data, new TypeToken<ArrayList<ParticipantView>>(){}.getType()));
+		}
 	}
 	
 	private void makeTable(HttpServletRequest req, HttpServletResponse resp) throws IOException {

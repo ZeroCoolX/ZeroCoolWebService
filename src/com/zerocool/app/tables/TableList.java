@@ -34,6 +34,10 @@ public class TableList {
 
 		return tables;
 	}
+	
+	public void reset() {
+		eventTableList.clear();
+	}
 
 	private EventTable containsEvent(String eventName) {
 		for (EventTable et : eventTableList) {
