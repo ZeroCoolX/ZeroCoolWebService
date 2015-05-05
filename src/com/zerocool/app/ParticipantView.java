@@ -11,7 +11,7 @@ public class ParticipantView  {
 	private long fin;
 	private int bib;
 	public String toRow() {
-		return "<tr"+ (fin == -1 ? " class='danger'" : "")+"><td>" + bib + "</td><td>" + eventName + "</td><td>" + startTime + "</td><td>" + (fin == -1 ? "DNF" : finishTime) + 
+		return "<tr"+ (fin == -1 ? " style='color:#D52727'" : "")+"><td>" + bib + "</td><td>" + eventName + "</td><td>" + startTime + "</td><td>" + (fin == -1 ? "DNF" : finishTime) + 
 				"</td><td>" + (fin == -1 ? "DNF" : elapsed) + "</td></tr>";
 	}
 	
